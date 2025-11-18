@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script  src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <title>WorkSphere</title>
+    </head>
+
+    <body class="p-0 flex min-h-screen">
+
+        <div class="bg-green-200 md: w-[15%] w-[10%] flex">
+            <div id="AddWorker" class="flex justify-end items-end px-4 py-2">
+                <button class="bg-green-600 rounded-lg px-1 py-2">Add New Worker</button>
+            </div>
+        </div>
+
+        <section class="bg-white grid grid-cols-3 w-full p-4 gap-4">
+
+            <div class="grid grid-rows-2 gap-4">
+
+                <div class="bg-green-300 p-4 rounded-xl shadow flex ">
+                    <strong class="text-lg">Réception</strong>
+                    <div class="flex justify-end items-end mt-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+
+                    </div>
+                </div>
+
+                <div class="bg-indigo-500 p-4 rounded-xl shadow flex h-full">
+                    <strong class="text-lg">Salle de conférence</strong>
+                    <div class="flex justify-end items-end mt-4">
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 col-span-2 col-end-7">
+
+                <div class="bg-red-100 p-4 rounded-xl shadow flex h-fit">
+                    <strong class="text-lg">Salle des serveurs</strong>
+                    <div class=" flex justify-end items-end mt-4">
+                      <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+                    </div>
+                    
+                </div>
+
+                <div class="bg-red-300 p-4 rounded-xl shadow flex h-fit">
+                    <strong class="text-lg">Salle de sécurité</strong>
+                    <div class="flex justify-end items-end mt-4">
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 col-span-2 col-end-7">
+
+                <div class="bg-orange-300 p-4 rounded-xl shadow flex">
+                    <strong class="text-lg">Salle du personnel</strong>
+                    <div class="flex justify-end items-end mt-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-full">
+                            +
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-orange-400 p-4 rounded-xl shadow flex">
+                    <strong class="text-lg">Salle d’archives</strong>
+
+                    <div class="flex justify-end items-end mt-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-full">
+                            +
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+         <div id="forml" class=" hidden border rounded-lg bg-white-200 p-4  w-fit h-fit">
+                <form action="sendData" method="POST" id="monForm" class="relative ">
+                    <div class="grid mt-4  ">
+                        <label for="nomPrenom">Nom&prénom</label>
+                    <input class="border-2 rounded-lg p-2" type="text" name="Nom" placeholder="Nom et prénom" id="nomPrenom" required/>
+                    </div>
+                   <div class=" grid mt-4">
+                     <label for="role">Rôle</label>
+                    <input  class="border-2 rounded-lg p-2 type="text" name="role" placeholder="Rôle" id="role" required/>
+                   </div>
+                    <div class="grid mt-4 ">
+                        <label for="photo">Photo</label>
+                        <input class="border-2 rounded-lg p-2" type="url" name="image" placeholder="(url)" id="photo" required>
+                     <div class="mt-4 relative left-15">
+                         <img src="" class="w-24 h-24 rounded-full object-cover border-2 border-black"/>
+
+                     </div>
+                    </div>
+                     
+                     <div class="grid mt-4" >
+                        <label for="email">Adresse Email</label>
+                        <input  class="border-2 rounded-lg p-2" type="email" name="email" placeholder="Adresse Email" id="email" required/>
+                     </div>
+                     <div class="grid mt-4">
+                        <label for="phone">Numéro de téléphone</label>
+                        <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212 6 12 34 56 78" id="phone"/>
+                     </div>
+                    
+                     <div class="border border-2 rounded-lg bg-green-300 flex justify-center px-1 py-1 mt-4">
+                        <button>enregistrer</button>
+                     </div>
+
+                </form>
+            </div>
+
+
+
+
+
+
+        <script src="main.js"></script>    
+    </body>
+</html>
