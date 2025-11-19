@@ -11,7 +11,10 @@
 
         <div class="bg-green-200 md: w-[15%] w-[10%] flex">
             <div id="AddWorker" class="flex justify-end items-end px-4 py-2">
-                <button class="bg-green-600 rounded-lg px-1 py-2 text-white">Add New Worker</button>
+                <div id="card">
+
+                </div>
+                <button class="bg-green-600 rounded-lg px-1 py-2 text-white cursor-pointer">Add New Worker</button>
             </div>
         </div>
 
@@ -81,10 +84,10 @@
 
         </section>
          <div id="forml" class=" hidden fixed  left-[45%] border rounded-lg bg-white p-4  w-fit h-full overflow-y-auto">
-                <form action="sendData" method="POST" id="monForm" class="relative ">
+                <form id="monForm" class="relative ">
                     <div class="grid mt-4  ">
                         <label for="nomPrenom">Nom&prénom</label>
-                    <input class="border-2 rounded-lg p-2" type="text" name="Nom" placeholder="Nom et prénom" id="nomPrenom" required/>
+                    <input class="border-2 rounded-lg p-2" type="text" name="Nom" placeholder="Nom et prénom" id="nomPrenom" />
                     </div>
                    <div class=" grid mt-4">
                      <label for="role">Rôle</label>
@@ -99,7 +102,7 @@
                    </div>
                     <div class="grid mt-4 ">
                         <label for="photo">Photo</label>
-                        <input class="border-2 rounded-lg p-2" type="url" name="image" placeholder="(url)" id="photo" required>
+                        <input class="border-2 rounded-lg p-2" type="url" name="image" placeholder="(url)" id="photo" >
                      <div class="mt-4 flex justify-center">
                          <img id="img" src="" class="w-24 h-24 rounded-full object-cover border-2 border-black"/>
 
@@ -108,7 +111,7 @@
                      
                      <div class="grid mt-4" >
                         <label for="email">Adresse Email</label>
-                        <input  class="border-2 rounded-lg p-2" type="email" name="email" placeholder="Adresse Email" id="email" required/>
+                        <input  class="border-2 rounded-lg p-2" type="email" name="email" placeholder="Adresse Email" id="email"/>
                      </div>
                      <div class="grid mt-4">
                         <label for="phone">Numéro de téléphone</label>
@@ -145,7 +148,7 @@
 
                   
                      <div class="border border-2 rounded-lg bg-green-300 flex justify-center px-1 py-1 mt-4">
-                        <button class="">enregistrer</button>
+                        <button type="submit" id="enregistrer" class="cursor-pointer">enregistrer</button>
                      </div>
 
                 </form>
