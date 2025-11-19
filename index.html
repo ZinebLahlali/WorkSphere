@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,11 +7,11 @@
         <title>WorkSphere</title>
     </head>
 
-    <body class="p-0 flex min-h-screen">
+    <body class="p-0 flex min-h-screen overflow-y-auto h-full w-full">
 
         <div class="bg-green-200 md: w-[15%] w-[10%] flex">
             <div id="AddWorker" class="flex justify-end items-end px-4 py-2">
-                <button class="bg-green-600 rounded-lg px-1 py-2">Add New Worker</button>
+                <button class="bg-green-600 rounded-lg px-1 py-2 text-white">Add New Worker</button>
             </div>
         </div>
 
@@ -19,7 +19,7 @@
 
             <div class="grid grid-rows-2 gap-4">
 
-                <div class="bg-green-300 p-4 rounded-xl shadow flex ">
+                <div id="reception" class="bg-green-300 p-4 rounded-xl shadow flex ">
                     <strong class="text-lg">Réception</strong>
                     <div class="flex justify-end items-end mt-4">
                         <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="bg-indigo-500 p-4 rounded-xl shadow flex h-full">
+                <div id="conference" class="bg-indigo-500 p-4 rounded-xl shadow flex h-full">
                     <strong class="text-lg">Salle de conférence</strong>
                     <div class="flex justify-end items-end mt-4">
                     <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
@@ -39,7 +39,7 @@
 
             <div class="grid grid-cols-2 gap-4 col-span-2 col-end-7">
 
-                <div class="bg-red-100 p-4 rounded-xl shadow flex h-fit">
+                <div  id="serveurs"   class="bg-red-100 p-4 rounded-xl shadow flex h-fit">
                     <strong class="text-lg">Salle des serveurs</strong>
                     <div class=" flex justify-end items-end mt-4">
                       <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
@@ -47,7 +47,7 @@
                     
                 </div>
 
-                <div class="bg-red-300 p-4 rounded-xl shadow flex h-fit">
+                <div  id="securite" class="bg-red-300 p-4 rounded-xl shadow flex h-fit">
                     <strong class="text-lg">Salle de sécurité</strong>
                     <div class="flex justify-end items-end mt-4">
                     <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
@@ -58,7 +58,7 @@
 
             <div class="grid grid-cols-2 gap-4 col-span-2 col-end-7">
 
-                <div class="bg-orange-300 p-4 rounded-xl shadow flex">
+                <div  id="personnel" class="bg-orange-300 p-4 rounded-xl shadow flex">
                     <strong class="text-lg">Salle du personnel</strong>
                     <div class="flex justify-end items-end mt-4">
                         <button class="bg-green-500 text-white px-4 py-2 rounded-full">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="bg-orange-400 p-4 rounded-xl shadow flex">
+                <div id="archives" class="bg-orange-400 p-4 rounded-xl shadow flex">
                     <strong class="text-lg">Salle d’archives</strong>
 
                     <div class="flex justify-end items-end mt-4">
@@ -80,7 +80,7 @@
             </div>
 
         </section>
-         <div id="forml" class=" hidden border rounded-lg bg-white-200 p-4  w-fit h-fit">
+         <div id="forml" class=" hidden fixed  left-[45%] border rounded-lg bg-white p-4  w-fit h-full overflow-y-auto">
                 <form action="sendData" method="POST" id="monForm" class="relative ">
                     <div class="grid mt-4  ">
                         <label for="nomPrenom">Nom&prénom</label>
@@ -88,13 +88,20 @@
                     </div>
                    <div class=" grid mt-4">
                      <label for="role">Rôle</label>
-                    <input  class="border-2 rounded-lg p-2 type="text" name="role" placeholder="Rôle" id="role" required/>
+                     <select name="Role" id="role">
+                        <option value="manger">Manager</option>
+                        <option value="technicien"> Technicien IT</option>
+                        <option value="employer">Empolyer</option>
+                        <option value="securite">Sécurité</option>
+                        <option value="nettoyage">Nettoyage</option>
+                        <option value="reception">Réception</option>
+                     </select>
                    </div>
                     <div class="grid mt-4 ">
                         <label for="photo">Photo</label>
                         <input class="border-2 rounded-lg p-2" type="url" name="image" placeholder="(url)" id="photo" required>
-                     <div class="mt-4 relative left-15">
-                         <img src="" class="w-24 h-24 rounded-full object-cover border-2 border-black"/>
+                     <div class="mt-4 flex justify-center">
+                         <img id="img" src="" class="w-24 h-24 rounded-full object-cover border-2 border-black"/>
 
                      </div>
                     </div>
@@ -107,9 +114,38 @@
                         <label for="phone">Numéro de téléphone</label>
                         <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212 6 12 34 56 78" id="phone"/>
                      </div>
-                    
+                     <div>
+                        <div>
+                            <label for="Exper">Expériences</label>
+                        </div>
+                        <div>
+                         <input class="border-2 rounded-lg p-2" type="text" name="metier" id="metier" required>
+                        </div>
+                        <div>
+                            <label for="descreption">Description</label>
+                        </div>
+                        <div class="mt-2">
+                         <textarea  class="border-2 rounded-lg p-2" name="descreption" id="descreption" required></textarea>
+                        </div>
+                       <div class="flex gap-4 mt-4">
+                        <div class="flex flex-rows gap-1">
+                         <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut" required/>
+                       </div>
+                       <div class="flex flex-rows gap-1">
+                        <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" required/>
+                       </div>
+                       </div>
+                     </div>
+                       <div id="expriences" class="flex flex-col">
+
+                    </div>
+                     <div class="mt-4 flex justify-center ">
+                        <button class="border-2 rounded-lg p-2 bg-green-600 text-white" id="AjouterExp">Ajouter Expériences</button>
+                     </div>
+
+                  
                      <div class="border border-2 rounded-lg bg-green-300 flex justify-center px-1 py-1 mt-4">
-                        <button>enregistrer</button>
+                        <button class="">enregistrer</button>
                      </div>
 
                 </form>
