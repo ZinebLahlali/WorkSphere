@@ -63,8 +63,19 @@ let emailRe = /^[^\s@\.\d]{4,}@[^\s\.@\W]{3,}\.[^\s\d@\W]{2,3}$/;
 let phoneNumber = /^\+212(6|7|5)\d{8}$/
 let NomReg = /^[a-zA-Z ]{3,}$/
 let i = localStorage.length;
+    Url.addEventListener('input', () =>{
+        if(Url.value == ""){
+            image.src = "avatar.jpg"
+        }
+        else{
+            image.src = Url.value
+
+        }
+        
+    })
 MonForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
     if(phoneNumber.test(phone.value)===false){
         console.log("false")
         alert("Le Numéro de téléphone est invalide")
@@ -100,9 +111,10 @@ MonForm.addEventListener('submit', (e) => {
     
     localStorage.setItem(i,JSON.stringify(object));
     i++;
-
+        MonForm.reset() 
     load();
     }
+
    
 
 );
