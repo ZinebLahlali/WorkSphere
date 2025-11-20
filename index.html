@@ -9,11 +9,12 @@
 
     <body class="p-0 flex min-h-screen overflow-y-auto h-full w-full">
 
-        <div class="bg-green-200 md: w-[15%] w-[10%] flex">
-            <div id="AddWorker" class="flex justify-end items-end px-4 py-2">
-                <div id="card">
+        <div class="bg-green-200 md: w-[15%] w-[10%] flex flex-col">
+            <div id="card">
 
                 </div>
+            <div id="AddWorker" class="flex justify-center items-end px-4 py-2">
+                
                 <button class="bg-green-600 rounded-lg px-1 py-2 text-white cursor-pointer">Add New Worker</button>
             </div>
         </div>
@@ -89,9 +90,9 @@
                         <label for="nomPrenom">Nom&prénom</label>
                     <input class="border-2 rounded-lg p-2" type="text" name="Nom" placeholder="Nom et prénom" id="nomPrenom" />
                     </div>
-                   <div class=" grid mt-4">
+                   <div class=" grid mt-4  ">
                      <label for="role">Rôle</label>
-                     <select name="Role" id="role">
+                     <select class="border-2 rounded-lg p-2" name="Role" id="role">
                         <option value="manger">Manager</option>
                         <option value="technicien"> Technicien IT</option>
                         <option value="employer">Empolyer</option>
@@ -115,7 +116,7 @@
                      </div>
                      <div class="grid mt-4">
                         <label for="phone">Numéro de téléphone</label>
-                        <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212 6 12 34 56 78" id="phone"/>
+                        <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212612345678" id="phone"/>
                      </div>
                      <div>
                         <div>

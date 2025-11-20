@@ -1,7 +1,7 @@
 const AddWorker = document.getElementById("AddWorker");
 const Forml = document.getElementById("forml");
 const MonForm = document.getElementById("monForm");
-const NomePrenom = document.getElementById("nomPrenom");
+const NomPrenom = document.getElementById("nomPrenom");
 const Role = document.getElementById("role");
 const Url = document.getElementById("photo");
 const image = document.getElementById("img");
@@ -22,7 +22,7 @@ const experience = document.getElementById("expriences");
 const Enregistrer = document.getElementById("enregistrer");
 const Card = document.getElementById("card");
 
-const Globalarry = [] 
+// const Globalarry = [] 
 
 
 
@@ -31,6 +31,7 @@ AddWorker.addEventListener('click', () => {
 })
 AjouterExp.addEventListener('click', () => {
     const printexperience = document.createElement("div");
+    console.log(printexperience)
     printexperience.innerHTML = `
 <div class="border-2 border-black mt-3">
                         <div>
@@ -58,44 +59,75 @@ AjouterExp.addEventListener('click', () => {
     experience.appendChild(printexperience);
 })
 
+let emailRe = /^[^\s@\.\d]{4,}@[^\s\.@\W]{3,}\.[^\s\d@\W]{2,3}$/;
+let phoneNumber = /^\+212(6|7|5)\d{8}$/
+let NomReg = /^[a-zA-Z ]{3,}$/
+let i = localStorage.length;
 MonForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if(phoneNumber.test(phone.value)===false){
+        console.log("false")
+        alert("Le Numéro de téléphone est invalide")
+        return;
+    }
+    if(NomReg.test(NomPrenom.value)=== false){
+        alert("Le Nom est invalide")
+    }
+  
+
+    if(emailRe.test(addressEmail.value) === false){
+        console.log("false")
+        alert("Adresse email est invalide")
+        return;
+    }
+
     const object = {
-        Nome: NomePrenom.value,
+        Nom: NomPrenom.value,
         Rôle: Role.value,
         Photo:Url.value,
-        Image: image.value,
         Email: addressEmail.value,
         telephone: phone.value,
+        Experiences: []
+    }
+
+    object.Experiences.push({
         Metier: work.value,
         Descreption: Descreption.value,
         DateDebut: dateDebut.value,
-        DateFin: dateFin.value,
+        DateFin: dateFin.value})
 
-
-    }
     Forml.classList.add('hidden');
-
-    Globalarry.push(object);
-
-    console.log(Globalarry);
     
+    localStorage.setItem(i,JSON.stringify(object));
+    i++;
+
+    load();
+    }
+   
+
+);
+
+
+
+function load(){
+    Card.innerHTML = "";
+    const saveData = localStorage.length;
+    for(let i=0; i<saveData; i++){
     const printData = document.createElement('div');
     printData.innerHTML = ` 
-    <img src=${} alt="">
+    <img src="${JSON.parse(localStorage.getItem(i)).Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
     <div>
-     <p>${NomePrenom}</p>
-     <p>${Role}</p>
-     <p>${phone}</p>
-     <p>${work}</p>
-
+        <p class="text-xs">${JSON.parse(localStorage.getItem(i)).Nom}</p>
+        <p class="text-xs">${JSON.parse(localStorage.getItem(i)).Rôle}</p>
     </div>
     `
+    printData.addEventListener('click',() =>{
+         console.log(printData);
+    })
+
     Card.appendChild(printData);
+}
 
-});
+}
 
-
-
-
-
+load();
