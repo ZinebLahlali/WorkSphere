@@ -26,7 +26,7 @@
                 <div id="reception" class="bg-green-300 p-4 rounded-xl shadow flex ">
                     <strong class="text-lg">Réception</strong>
                     <div class="flex justify-end items-end mt-4">
-                        <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+                        <button  id="btnReception" class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
 
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                 <div  id="serveurs"   class="bg-red-100 p-4 rounded-xl shadow flex h-fit">
                     <strong class="text-lg">Salle des serveurs</strong>
                     <div class=" flex justify-end items-end mt-4">
-                      <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+                      <button id="btnServeur" class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
                     </div>
                     
                 </div>
@@ -54,7 +54,7 @@
                 <div  id="securite" class="bg-red-300 p-4 rounded-xl shadow flex h-fit">
                     <strong class="text-lg">Salle de sécurité</strong>
                     <div class="flex justify-end items-end mt-4">
-                    <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+                    <button id="btnSecurite" class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
                     </div>
                 </div>
 
@@ -155,9 +155,9 @@
                 </form>
             </div>
 
-            <div class="border-2 ">
-
-            </div>
+            <div class=" hidden  border-2  h-fit w-fit" id="cardEmployer"></div>
+            <div class=" hidden  border-2  h-fit w-fit" id="cardServeur"></div>
+            <div class=" hidden  border-2  h-fit w-fit" id="cardReseption"></div>
 
 
 

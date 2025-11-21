@@ -21,17 +21,22 @@ const Reception = document.getElementById("reception");
 const experience = document.getElementById("expriences");
 const Enregistrer = document.getElementById("enregistrer");
 const Card = document.getElementById("card");
+const CardEmployer = document.getElementById("cardEmployer");
+const cardServeur = document.getElementById("cardServeur")
+const btnSecurite = document.getElementById("btnSecurite");
+const btnServeur = document.getElementById("btnServeur")
+const btnReception = document.getElementById("btnReception")
 
-// const Globalarry = [] 
+// const Globalarry = []
 
+const Employees = JSON.parse(localStorage.getItem("employees")) || [];
 
-
-AddWorker.addEventListener('click', () => {
-    Forml.classList.toggle('hidden')
-})
-AjouterExp.addEventListener('click', () => {
+AddWorker.addEventListener("click", () => {
+    Forml.classList.toggle("hidden");
+});
+AjouterExp.addEventListener("click", () => {
     const printexperience = document.createElement("div");
-    console.log(printexperience)
+    console.log(printexperience);
     printexperience.innerHTML = `
 <div class="border-2 border-black mt-3">
                         <div>
@@ -57,89 +62,134 @@ AjouterExp.addEventListener('click', () => {
 </div>
 `;
     experience.appendChild(printexperience);
-})
+});
 
 let emailRe = /^[^\s@\.\d]{4,}@[^\s\.@\W]{3,}\.[^\s\d@\W]{2,3}$/;
-let phoneNumber = /^\+212(6|7|5)\d{8}$/
-let NomReg = /^[a-zA-Z ]{3,}$/
-let i = localStorage.length;
-    Url.addEventListener('input', () =>{
-        if(Url.value == ""){
-            image.src = "avatar.jpg"
-        }
-        else{
-            image.src = Url.value
-
-        }
-        
-    })
-MonForm.addEventListener('submit', (e) => {
+let phoneNumber = /^\+212(6|7|5)\d{8}$/;
+let NomReg = /^[a-zA-Z ]{3,}$/;
+Url.addEventListener("input", () => {
+    if (Url.value == "") {
+        image.src = "avatar.jpg";
+    } else {
+        image.src = Url.value;
+    }
+});
+MonForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if(phoneNumber.test(phone.value)===false){
-        console.log("false")
-        alert("Le Numéro de téléphone est invalide")
+    if (phoneNumber.test(phone.value) === false) {
+        console.log("false");
+        alert("Le Numéro de téléphone est invalide");
         return;
     }
-    if(NomReg.test(NomPrenom.value)=== false){
-        alert("Le Nom est invalide")
+    if (NomReg.test(NomPrenom.value) === false) {
+        alert("Le Nom est invalide");
     }
-  
 
-    if(emailRe.test(addressEmail.value) === false){
-        console.log("false")
-        alert("Adresse email est invalide")
+    if (emailRe.test(addressEmail.value) === false) {
+        console.log("false");
+        alert("Adresse email est invalide");
         return;
     }
 
     const object = {
         Nom: NomPrenom.value,
         Rôle: Role.value,
-        Photo:Url.value,
+        Photo: Url.value,
         Email: addressEmail.value,
         telephone: phone.value,
-        Experiences: []
-    }
+        Experiences: [
+            {
+                Metier: work.value,
+                Descreption: Descreption.value,
+                DateDebut: dateDebut.value,
+                DateFin: dateFin.value,
+            },
+        ],
+    };
 
-    object.Experiences.push({
-        Metier: work.value,
-        Descreption: Descreption.value,
-        DateDebut: dateDebut.value,
-        DateFin: dateFin.value})
+    Employees.push(object);
 
-    Forml.classList.add('hidden');
-    
-    localStorage.setItem(i,JSON.stringify(object));
-    i++;
-        MonForm.reset() 
+    localStorage.setItem("employees", JSON.stringify(Employees));
+
+    Forml.classList.add("hidden");
+
+    MonForm.reset();
     load();
-    }
+});
 
-   
-
-);
-
-
-
-function load(){
+function load() {
     Card.innerHTML = "";
-    const saveData = localStorage.length;
-    for(let i=0; i<saveData; i++){
-    const printData = document.createElement('div');
-    printData.innerHTML = ` 
-    <img src="${JSON.parse(localStorage.getItem(i)).Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
+    const saveData = Employees.length;
+
+    for (let i = 0; i < saveData; i++) {
+        const printData = document.createElement("div");
+        printData.innerHTML = ` 
+    <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
     <div>
-        <p class="text-xs">${JSON.parse(localStorage.getItem(i)).Nom}</p>
-        <p class="text-xs">${JSON.parse(localStorage.getItem(i)).Rôle}</p>
+        <p class="text-xs">${Employees[i].Nom}</p>
+        <p class="text-xs">${Employees[i].Rôle}</p>
     </div>
-    `
-    printData.addEventListener('click',() =>{
-         console.log(printData);
-    })
+    `;
+        printData.addEventListener("click", () => {
+            console.log(printData);
+        });
 
-    Card.appendChild(printData);
-}
-
+        Card.appendChild(printData);
+    }
 }
 
 load();
+function employer() {
+  let content = "";
+    for (let i = 0; i < Employees.length; i++) {
+        
+        switch (Employees[i].Rôle) {
+            case "securite":
+            case "Manager":
+               console.log(Employees[i].Rôle);
+                content += `
+                   <p>${Employees[i].Nom}</p>
+                   <p>${Employees[i].Rôle}</p>
+                `;
+                CardEmployer.innerHTML = content;
+                break;
+            case "technicien":
+            case "Manager":    
+                content += `
+                <p>${Employees[i].Nom}</p>
+                <p>${Employees[i].Rôle}</p>
+
+                `;
+                cardServeur.innerHTML = content;
+                break;
+            case "Réception":
+                console.log(Employees[i].Rôle);
+                content += `
+                  <p>${Employees[i].Nom}</p>
+                  <p>${Employees[i].Rôle}</p>
+                `;
+                cardReseption.innerHTML = content;
+                break;
+
+
+                
+
+        }
+
+
+    }
+}
+
+
+btnSecurite.addEventListener("click", () => {
+    CardEmployer.classList.remove("hidden")
+    cardServeur.classList.add("hidden")
+    employer();
+});
+btnServeur.addEventListener("click", () => {
+    cardServeur.classList.remove("hidden")
+    CardEmployer.classList.add("hidden")
+    employer();
+});
+btn
