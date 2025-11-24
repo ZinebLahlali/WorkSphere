@@ -26,7 +26,7 @@ const experience = document.getElementById("expriences");
 const Enregistrer = document.getElementById("enregistrer");
 //Affichage
 const Card = document.getElementById("card");
-const CardEmployer = document.getElementById("cardEmployer");
+const cardSecurite = document.getElementById("cardSecurite");
 const cardServeur = document.getElementById("cardServeur")
 const cardReseption = document.getElementById("cardReseption");
 const cardArchives = document.getElementById("cardArchives")
@@ -41,8 +41,9 @@ const btnServeur = document.getElementById("btnServeur");
 const btnReception = document.getElementById("btnReception");
 const btnConference = document.getElementById("btnConference");
 const btnPersonnel = document.getElementById("btnPersonnel");
-const brnArchives = document.getElementById("brnArchives");
+const btnArchives = document.getElementById("brnArchives");
 const btnCardEmp = document.getElementById("btnCardEmp");
+const btnAnnuler = document.getElementById("btnAnnuler");
 
 
 
@@ -93,6 +94,9 @@ Url.addEventListener("input", () => {
         image.src = Url.value;
     }
 });
+   btnAnnuler.addEventListener('click', ()=>{
+       Forml.classList.add("hidden"); 
+     })
 MonForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -128,6 +132,7 @@ MonForm.addEventListener("submit", (e) => {
         ],
     };
  id++;
+  
     Employees.push(object);
 
     localStorage.setItem("employees", JSON.stringify(Employees));
@@ -168,7 +173,7 @@ function load() {
 load();
 function employer(role) {
     
-    CardEmployer.innerHTML="";
+    cardSecurite.innerHTML="";
     cardServeur.innerHTML = "";
     cardReseption.innerHTML = "";
     cardPersonnel.innerHTML = "";
@@ -176,88 +181,57 @@ function employer(role) {
     cardArchives.innerHTML = "";
 
     for (let i = 0; i < Employees.length; i++) {
-         const empRole = Employees[i].Rôle
+         const empRole = Employees[i].Rôle;
+         let container = null;
          
         switch (role) {
-            case "securite":
-                if (Employees[i].Rôle == "securite" || Employees[i].Rôle == "Manager" || Employees[i].Rôle == "Nettoyage") {
-          let content = document.createElement('div');
-                    content.innerHTML = `
-                    <div>
-                  <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-                    <div>
-                        <p class="text-xs">${Employees[i].Nom}</p>
-                        <p class="text-xs">${Employees[i].Rôle}</p>
-                    </div>
-                    </div>
-                `;
-                    CardEmployer.appendChild(content);
+            case "Securite":
+                if (empRole == "Securite" || empRole == "Manager" || empRole == "Nettoyage") {
+                    container = cardSecurite;
                 }
                 break;
             case "Technicien":
                 
-                if (Employees[i].Rôle == "Technicien" || Employees[i].Rôle == "Manager" || Employees[i].Rôle == "Nettoyage") {
-                 let content = document.createElement('div');
-                    content.innerHTML = `
-                  <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-                    <div>
-                        <p class="text-xs">${Employees[i].Nom}</p>
-                        <p class="text-xs">${Employees[i].Rôle}</p>
-                    </div>
-                `;
-                    cardServeur.appendChild(content);
+                if (empRole == "Technicien" || empRole == "Manager" || empRole == "Nettoyage") {
+                   container = cardServeur;
                 }
                 break;
             case "Reception":
               
-                console.log(Employees[i].Rôle);
-                if (Employees[i].Rôle == "Reception" || Employees[i].Rôle == "Manager" || Employees[i].Rôle == "Nettoyage") {
-                    let content = document.createElement('div');
-                         content.innerHTML = `
-                  <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-                    <div>
-                        <p class="text-xs">${Employees[i].Nom}</p>
-                        <p class="text-xs">${Employees[i].Rôle}</p>
-                    </div>
-                `;
-                    cardReseption.appendChild(content);
+                if (empRole == "Reception" || empRole == "Manager" || empRole == "Nettoyage") {
+                   container = cardReseption;
                 }
                 break;
-
-
             case "Empolyer":
               
-                if (Employees[i].Rôle == "Empolyer" || Employees[i].Rôle == "Manager" || Employees[i].Rôle == "Nettoyage") {
-                    let content = document.createElement('div');
-                          content.innerHTML = `
-                  <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-                    <div>
-                        <p class="text-xs">${Employees[i].Nom}</p>
-                        <p class="text-xs">${Employees[i].Rôle}</p>
-                    </div>
-                `;
-                    cardPersonnel.appendChild(content);
+                if (empRole == "Empolyer" || empRole == "Manager" || empRole == "Nettoyage") {
+                    container = cardPersonnel;
                 }
                 break;
-                case "All":
-      
-                    if(Employees[i].Rôle == "Empolyer" || Employees[i].Rôle == "Manager" || Employees[i].Rôle == "Nettoyage"
-                        || Employees[i].Rôle == "Technicien" || Employees[i].Rôle == "Reception" || Employees[i].Rôle == "securite"){
-                             let content = document.createElement('div');
-                          content.innerHTML = `
-                  <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-                    <div>
-                        <p class="text-xs">${Employees[i].Nom}</p>
-                        <p class="text-xs">${Employees[i].Rôle}</p>
-                    </div>
-                `;
-                    cardConference.appendChild(content);
+                case "Archives":
+                if (empRole !== "Nettoyage"){                   
+                   container = cardArchives;
                 }
+                break;
+
+                case "All":
+                    container = cardConference;
                 break;
             default:
-               message = "Employer est invalide";
-
-
+               alert("Invalide role");
+        }
+        if(container){
+             let content = document.createElement('div');
+                    content.innerHTML = `
+                    <div>
+                  <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
+                    <div>
+                        <p class="text-xs">${Employees[i].Nom}</p>
+                        <p class="text-xs">${Employees[i].Rôle}</p>
+                    </div>
+                    </div>
+                `;
+                container.appendChild(content);
         }
 
 
@@ -266,41 +240,68 @@ function employer(role) {
 
 
 btnSecurite.addEventListener('click', function(){
-    CardEmployer.classList.remove("hidden")
-    cardServeur.classList.add("hidden")
-    cardReseption.classList.add("hidden")
+    console.log("hello")
+    cardSecurite.classList.remove("hidden")
+    cardServeur.classList.add("hidden");
+     cardReseption.classList.add("hidden");
+     cardPersonnel.classList.add("hidden");
+     cardArchives.classList.add("hidden");
+     cardConference.classList.add("hidden");
     employer("securite");
 });
 
 btnServeur.addEventListener('click',function () {
-        cardServeur.classList.remove("hidden");
-        CardEmployer.classList.add("hidden");
-        cardReseption.classList.add("hidden")
+     cardServeur.classList.remove("hidden");
+     cardSecurite.classList.add("hidden");
+     cardReseption.classList.add("hidden");
+     cardPersonnel.classList.add("hidden");
+     cardArchives.classList.add("hidden");
+     cardConference.classList.add("hidden");
         employer("Technicien");
     });
 
 btnReception.addEventListener('click', function(){
-        console.log("HEllO");
-    cardServeur.classList.add("hidden")
-    CardEmployer.classList.add("hidden")
-    cardReseption.classList.remove("hidden")
+       console.log("HEllO");
+     cardServeur.classList.add("hidden");
+     cardSecurite.classList.add("hidden");
+     cardPersonnel.classList.add("hidden");
+     cardArchives.classList.add("hidden");
+     cardConference.classList.add("hidden");
+     cardReseption.classList.remove("hidden");
+   
     employer("Reception");
 
 });
   btnConference.addEventListener('click' , function(){
-    cardServeur.classList.add("hidden")
-    CardEmployer.classList.add("hidden")
-    cardReseption.classList.add("hidden")
+     cardServeur.classList.add("hidden");
+     cardSecurite.classList.add("hidden");
+     cardReseption.classList.add("hidden");
+     cardPersonnel.classList.add("hidden");
+     cardArchives.classList.add("hidden");
      cardConference.classList.remove("hidden");
-     employer("")
+     employer("All");
     
   })
 
   btnPersonnel.addEventListener('click', () =>{
-    cardServeur.classList.add("hidden")
-    CardEmployer.classList.add("hidden")
-    cardReseption.classList.add("hidden")
-    cardPersonnel.classList.remove("hidden");
+     cardServeur.classList.add("hidden");
+     cardSecurite.classList.add("hidden");
+     cardReseption.classList.add("hidden");
+     cardPersonnel.classList.add("hidden");
+     cardArchives.classList.add("hidden");
+     cardPersonnel.classList.remove("hidden");
+    employer("Empolyer");
+  })
+
+  btnArchives.addEventListener('click', () =>{
+     cardServeur.classList.add("hidden");
+     cardSecurite.classList.add("hidden");
+     cardReseption.classList.add("hidden");
+     cardPersonnel.classList.add("hidden");
+     cardArchives.classList.add("hidden");
+     cardArchives.classList.remove("hidden");
+    employer("Archives");
+
   })
 
   
@@ -340,7 +341,7 @@ function afficher(employer){
   
   `;
   card.querySelector("#btnCardEmp").addEventListener("click",()=>{
-CardWorker.classList.add("hidden");
+  CardWorker.classList.add("hidden");
   })
 
   CardWorker.classList.remove("hidden")

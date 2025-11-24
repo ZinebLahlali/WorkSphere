@@ -103,20 +103,20 @@
                                     <label for="Exper">Expériences</label>
                                 </div>
                                 <div>
-                                <input class="border-2 rounded-lg p-2" type="text" name="metier" id="Exper" required>
+                                <input class="border-2 rounded-lg p-2" type="text" name="metier" id="Exper" >
                                 </div>
                                 <div>
                                     <label for="descreption">Description</label>
                                 </div>
                                 <div class="mt-2">
-                                <textarea  class="border-2 rounded-lg p-2" name="descreption" id="descreption" required></textarea>
+                                <textarea  class="border-2 rounded-lg p-2" name="descreption" id="descreption"></textarea>
                                 </div>
                             <div class="flex gap-4 mt-4">
                                 <div class="flex flex-rows gap-1">
-                                <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut" required/>
+                                <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut"/>
                             </div>
                             <div class="flex flex-rows gap-1">
-                                <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" required/>
+                                <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" />
                             </div>
                             </div>
                             </div>
@@ -129,8 +129,8 @@
 
                         
                             <div class="grid grid-cols-2 px-1 py-1 mt-4 gap-3">
-                                <button type="submit" id="enregistrer" class="cursor-pointer bg-green-300 rounded-xs">enregistrer</button>
-                                <button class="cursor-pointer bg-red-500 rounded-xs">Annuler</button>
+                                <button type="submit" id="enregistrer" class="cursor-pointer bg-green-300 rounded-lg">enregistrer</button>
+                                <button  id="btnAnnuler" class="cursor-pointer bg-red-500 rounded-lg">Annuler</button>
                             </div>
 
                         </form>
@@ -140,8 +140,8 @@
                       
 
                     <div id="CardAffichage">
-                            <div class="hidden border-2  w-full h-full rounded-lg bg-green-300 fixed" id="cardEmployer">
-                                 <button class=" rounded-xs w-20 h-20 text-gray-300 cursor-pointer  ">X</button>
+                            <div class="hidden border-2  w-full h-full rounded-lg bg-green-300 fixed" id="cardSecurite">
+                                 <button class=" rounded-xs w-20 h-20 text-gray-300 cursor-pointer">X</button>
                             </div>
                             <div class="hidden w-full h-full rounded-lg border-2 w-[20%]" id="cardServeur">
 
