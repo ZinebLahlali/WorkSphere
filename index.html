@@ -7,163 +7,168 @@
         <title>WorkSphere</title>
     </head>
 
-    <body class="p-0 flex min-h-screen overflow-y-auto h-full w-full">
+    <body class=" p-0 m-0 overflow-x-hidden">
+        <main class="grid  grid-cols-[15%_95%]  h-full">
 
-        <div class="bg-green-200 md: w-[15%] w-[10%] flex flex-col">
-            <div id="card">
-
+                <div class="bg-green-200">
+                    <div class="p-1 flex justify-center mt-2">
+                        <strong class="border border-2 rounded-lg p-2  ">Unassigned Staff</strong>
+                    </div>
+                    <div id="card" class="p-2 grid gap-3 overflow-y-auto"></div>
+                    <div id="AddWorker" class="flex py-2 px-5 items-end">
+                        <button class="bg-green-600 rounded-lg px-1 py-2">Add New Worker</button>
+                    </div>
                 </div>
-            <div id="AddWorker" class="flex justify-center items-end px-4 py-2">
+                <section class=" p-1 bg-gray-400 grid grid-cols-20 gap-3 w-full h-screen">
+                <div class="bg-red-200  grid col-start-1 col-end-6 row-start-1 row-end-6 p-2 rounded-lg">Réception
+                    <div class="flex justify-end items-end mt-4">
+                        <button id="btnReception" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
+                                    +
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-green-600 grid row-start-6 row-end-11 col-start-1 col-end-6 p-2 rounded-lg">Salle de conférence
+                    <div class="flex justify-end items-end mt-4">
+                        <button id="btnConference" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
+                                    +
+                                </button>
+                            </div>
+                </div>
+                <div class="bg-green-200 grid col-start-10 col-end-14 row-start-1 row-end-5 p-2 rounded-lg ">Salle des serveurs
+                    <div class="flex justify-end items-end mt-4">
+                                <button id="btnServeur" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
+                                    +
+                                </button>
+                            </div>
+                </div>
+                <div class="bg-red-200 grid col-start-14 col-end-18 row-start-1 row-end-5 p-2 rounded-lg">Salle de sécurité
+                    <div class="flex justify-end items-end mt-4">
+                                <button id="btnSecurite" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
+                                    +
+                                </button>
+                            </div>
+                </div>
+                <div  class="bg-blue-400 grid col-start-10 col-end-14 row-start-7 p-2 row-end-11 rounded-lg">Salle du personnel
+                    <div class="flex justify-end items-end mt-4">
+                                <button id="btnPersonnel" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
+                                    +
+                                </button>
+                            </div>
+                </div>
+                <div  class="bg-blue-600 grid col-start-14  col-end-18  row-start-7 row-end-11 p-2 rounded-lg">Salle d’archives
+                    <div class="flex justify-end items-end mt-4">
+                                <button id="brnArchives" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
+                                    +
+                                </button>
+                            </div>
+                </div>
+                </section>
                 
-                <button class="bg-green-600 rounded-lg px-1 py-2 text-white cursor-pointer">Add New Worker</button>
-            </div>
-        </div>
+                <div id="forml" class=" hidden fixed  left-[45%] border rounded-lg bg-white p-4  w-fit h-full overflow-y-auto">
+                        <form id="monForm" class="relative ">
+                            <div class="grid mt-4  ">
+                                <label for="nomPrenom">Nom&prénom</label>
+                            <input class="border-2 rounded-lg p-2" type="text" name="Nom" placeholder="Nom et prénom" id="nomPrenom" />
+                            </div>
+                        <div class=" grid mt-4  ">
+                            <label for="role">Rôle</label>
+                            <select class="border-2 rounded-lg p-2" name="Role" id="role">
+                                <option value="Manager">Manager</option>
+                                <option value="Technicien"> Technicien IT</option>
+                                <option value="Empolyer">Empolyer</option>
+                                <option value="Securite">Sécurité</option>
+                                <option value="Nettoyage">Nettoyage</option>
+                                <option value="Reception">Réception</option>
+                            </select>
+                        </div>
+                            <div class="grid mt-4 ">
+                                <label for="photo">Photo</label>
+                                <input class="border-2 rounded-lg p-2" type="url" name="image" placeholder="(url)" id="photo" >
+                            <div class="mt-4 flex justify-center">
+                                <img id="img" src="avatar.jpg" class="w-24 h-24 rounded-full object-cover border-2 border-black"/>
 
-        <section class="bg-white grid grid-cols-3 w-full p-4 gap-4">
+                            </div>
+                            </div>
+                            
+                            <div class="grid mt-4" >
+                                <label for="email">Adresse Email</label>
+                                <input  class="border-2 rounded-lg p-2" type="email" name="email" placeholder="Adresse Email" id="email"/>
+                            </div>
+                            <div class="grid mt-4">
+                                <label for="phone">Numéro de téléphone</label>
+                                <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212612345678" id="phone"/>
+                            </div>
+                            <div>
+                                <div>
+                                    <label for="Exper">Expériences</label>
+                                </div>
+                                <div>
+                                <input class="border-2 rounded-lg p-2" type="text" name="metier" id="Exper" required>
+                                </div>
+                                <div>
+                                    <label for="descreption">Description</label>
+                                </div>
+                                <div class="mt-2">
+                                <textarea  class="border-2 rounded-lg p-2" name="descreption" id="descreption" required></textarea>
+                                </div>
+                            <div class="flex gap-4 mt-4">
+                                <div class="flex flex-rows gap-1">
+                                <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut" required/>
+                            </div>
+                            <div class="flex flex-rows gap-1">
+                                <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" required/>
+                            </div>
+                            </div>
+                            </div>
+                            <div id="expriences" class="flex flex-col">
 
-            <div class="grid grid-rows-2 gap-4">
+                            </div>
+                            <div class="mt-4 flex justify-center ">
+                                <button class="border-2 rounded-lg p-2 bg-green-600 text-white" id="AjouterExp">Ajouter Expériences</button>
+                            </div>
 
-                <div id="reception" class="bg-green-300 p-4 rounded-xl shadow flex ">
-                    <strong class="text-lg">Réception</strong>
-                    <div class="flex justify-end items-end mt-4">
-                        <button  id="btnReception" class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
+                        
+                            <div class="grid grid-cols-2 px-1 py-1 mt-4 gap-3">
+                                <button type="submit" id="enregistrer" class="cursor-pointer bg-green-300 rounded-xs">enregistrer</button>
+                                <button class="cursor-pointer bg-red-500 rounded-xs">Annuler</button>
+                            </div>
 
-                    </div>
-                </div>
-
-                <div id="conference" class="bg-indigo-500 p-4 rounded-xl shadow flex h-full">
-                    <strong class="text-lg">Salle de conférence</strong>
-                    <div class="flex justify-end items-end mt-4">
-                    <button class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 col-span-2 col-end-7">
-
-                <div  id="serveurs"   class="bg-red-100 p-4 rounded-xl shadow flex h-fit">
-                    <strong class="text-lg">Salle des serveurs</strong>
-                    <div class=" flex justify-end items-end mt-4">
-                      <button id="btnServeur" class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
-                    </div>
-                    
-                </div>
-
-                <div  id="securite" class="bg-red-300 p-4 rounded-xl shadow flex h-fit">
-                    <strong class="text-lg">Salle de sécurité</strong>
-                    <div class="flex justify-end items-end mt-4">
-                    <button id="btnSecurite" class="bg-green-500 text-white px-4 py-2 rounded-full">+</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 col-span-2 col-end-7">
-
-                <div  id="personnel" class="bg-orange-300 p-4 rounded-xl shadow flex">
-                    <strong class="text-lg">Salle du personnel</strong>
-                    <div class="flex justify-end items-end mt-4">
-                        <button class="bg-green-500 text-white px-4 py-2 rounded-full">
-                            +
-                        </button>
-                    </div>
-                </div>
-
-                <div id="archives" class="bg-orange-400 p-4 rounded-xl shadow flex">
-                    <strong class="text-lg">Salle d’archives</strong>
-
-                    <div class="flex justify-end items-end mt-4">
-                        <button class="bg-green-500 text-white px-4 py-2 rounded-full">
-                            +
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-         <div id="forml" class=" hidden fixed  left-[45%] border rounded-lg bg-white p-4  w-fit h-full overflow-y-auto">
-                <form id="monForm" class="relative ">
-                    <div class="grid mt-4  ">
-                        <label for="nomPrenom">Nom&prénom</label>
-                    <input class="border-2 rounded-lg p-2" type="text" name="Nom" placeholder="Nom et prénom" id="nomPrenom" />
-                    </div>
-                   <div class=" grid mt-4  ">
-                     <label for="role">Rôle</label>
-                     <select class="border-2 rounded-lg p-2" name="Role" id="role">
-                        <option value="manger">Manager</option>
-                        <option value="technicien"> Technicien IT</option>
-                        <option value="employer">Empolyer</option>
-                        <option value="securite">Sécurité</option>
-                        <option value="nettoyage">Nettoyage</option>
-                        <option value="reception">Réception</option>
-                     </select>
-                   </div>
-                    <div class="grid mt-4 ">
-                        <label for="photo">Photo</label>
-                        <input class="border-2 rounded-lg p-2" type="url" name="image" placeholder="(url)" id="photo" >
-                     <div class="mt-4 flex justify-center">
-                         <img id="img" src="avatar.jpg" class="w-24 h-24 rounded-full object-cover border-2 border-black"/>
-
-                     </div>
-                    </div>
+                        </form>
                      
-                     <div class="grid mt-4" >
-                        <label for="email">Adresse Email</label>
-                        <input  class="border-2 rounded-lg p-2" type="email" name="email" placeholder="Adresse Email" id="email"/>
-                     </div>
-                     <div class="grid mt-4">
-                        <label for="phone">Numéro de téléphone</label>
-                        <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212612345678" id="phone"/>
-                     </div>
-                     <div>
-                        <div>
-                            <label for="Exper">Expériences</label>
-                        </div>
-                        <div>
-                         <input class="border-2 rounded-lg p-2" type="text" name="metier" id="metier" required>
-                        </div>
-                        <div>
-                            <label for="descreption">Description</label>
-                        </div>
-                        <div class="mt-2">
-                         <textarea  class="border-2 rounded-lg p-2" name="descreption" id="descreption" required></textarea>
-                        </div>
-                       <div class="flex gap-4 mt-4">
-                        <div class="flex flex-rows gap-1">
-                         <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut" required/>
-                       </div>
-                       <div class="flex flex-rows gap-1">
-                        <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" required/>
-                       </div>
-                       </div>
-                     </div>
-                       <div id="expriences" class="flex flex-col">
-
                     </div>
-                     <div class="mt-4 flex justify-center ">
-                        <button class="border-2 rounded-lg p-2 bg-green-600 text-white" id="AjouterExp">Ajouter Expériences</button>
-                     </div>
+ 
+                      
 
-                  
-                     <div class="border border-2 rounded-lg bg-green-300 flex justify-center px-1 py-1 mt-4">
-                        <button type="submit" id="enregistrer" class="cursor-pointer">enregistrer</button>
-                     </div>
+                    <div id="CardAffichage">
+                            <div class="hidden border-2  w-full h-full rounded-lg bg-green-300 fixed" id="cardEmployer">
+                                 <button class=" rounded-xs w-20 h-20 text-gray-300 cursor-pointer  ">X</button>
+                            </div>
+                            <div class="hidden w-full h-full rounded-lg border-2 w-[20%]" id="cardServeur">
 
-                </form>
-            </div>
+                            </div>
+                            <div class="hidden w-full h-full rounded-lg border-2 w-[20%]" id="cardReseption">
 
-            <div class=" hidden  border-2  h-fit w-fit" id="cardEmployer"></div>
-            <div class=" hidden  border-2  h-fit w-fit" id="cardServeur"></div>
-            <div class=" hidden  border-2  h-fit w-fit" id="cardReseption"></div>
+                            </div>
+                            <div class="hidden w-full h-full rounded-lg border-2 w-[20%]" id="cardConference">
+
+                            </div>
+                            <div class="hidden w-full h-full rounded-lg  border-2 w-[20%]" id="cardPersonnel">
+
+                            </div>
+                            <div class="hidden w-full h-full rounded-lg border-2 w-[20%]" id="cardArchives">
+
+                            </div>
+                    </div>
+                
 
 
 
 
+        </main>
+ <div id="CardWorker" class="hidden fixed top-16 right-132 w-120 bg-blue-400 p-5">
+   
 
-
+                        </div>
         <script src="main.js"></script>    
     </body>
 </html>
