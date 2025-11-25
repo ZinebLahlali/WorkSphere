@@ -35,6 +35,7 @@ const removeCard = document.querySelectorAll(".removeCard");
 const CardAffichage = document.getElementById("CardAffichage");
 const CardWorker = document.getElementById("CardWorker");
 const cardPersonnel = document.getElementById("cardPersonnel");
+const conferenceList = document.getElementById("conferenceList");
 //Buttons
 const btnSecurite = document.getElementById("btnSecurite");
 const btnServeur = document.getElementById("btnServeur");
@@ -48,9 +49,9 @@ const btnAnnuler = document.getElementById("btnAnnuler");
 
 
 // const Globalarry = []
-let id=1;
-const Employees = JSON.parse(localStorage.getItem("employees")) || [];
 
+const Employees = JSON.parse(localStorage.getItem("employees")) || [];
+let id=Employees.length + 1;
 AddWorker.addEventListener("click", () => {
     Forml.classList.toggle("hidden");
 });
@@ -170,8 +171,20 @@ function load() {
     }
 }
 
+function addToZone(id,room){
+    // console.log(id + room);
+    
+    let finded = false;
+    for(let i=0 ; i< Employees.length;i++){
+        if(Employees[i].Id === id){
+            return true;
+        } else if(!finded)
+            return;
+    }
+}
+
 load();
-function employer(role) {
+function employer(room) {
     
     cardSecurite.innerHTML="";
     cardServeur.innerHTML = "";
@@ -182,48 +195,10 @@ function employer(role) {
 
     for (let i = 0; i < Employees.length; i++) {
          const empRole = Employees[i].Rôle;
-         let container = null;
-         
-        switch (role) {
-            case "Securite":
-                if (empRole == "Securite" || empRole == "Manager" || empRole == "Nettoyage") {
-                    container = cardSecurite;
-                }
-                break;
-            case "Technicien":
-                
-                if (empRole == "Technicien" || empRole == "Manager" || empRole == "Nettoyage") {
-                   container = cardServeur;
-                }
-                break;
-            case "Reception":
-              
-                if (empRole == "Reception" || empRole == "Manager" || empRole == "Nettoyage") {
-                   container = cardReseption;
-                }
-                break;
-            case "Empolyer":
-              
-                if (empRole == "Empolyer" || empRole == "Manager" || empRole == "Nettoyage") {
-                    container = cardPersonnel;
-                }
-                break;
-                case "Archives":
-                if (empRole !== "Nettoyage"){                   
-                   container = cardArchives;
-                }
-                break;
-
-                case "All":
-                    container = cardConference;
-                break;
-            default:
-               alert("Invalide role");
-        }
-        if(container){
-             let content = document.createElement('div');
+         let content = document.createElement('div');
                     content.innerHTML = `
-                    <div>
+                    <div class="relative">
+                     <div><button onclick="addToZone(${Employees[i].Id}, '${room}')" class="border text-xs border-2 absolute left-30   p-2 rounded-full bg-green-500 w-15 h-10">Add</button> </div>
                   <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
                     <div>
                         <p class="text-xs">${Employees[i].Nom}</p>
@@ -231,10 +206,38 @@ function employer(role) {
                     </div>
                     </div>
                 `;
-                container.appendChild(content);
+         
+        switch(room){
+            case "securite":
+                if(empRole == "Securite" || empRole == "Manager" || empRole == "Nettoyage") {
+                    cardSecurite.appendChild(content);
+                }
+                break;
+            case "Technicien":
+                if(empRole == "Technicien" || empRole == "Manager" || empRole == "Nettoyage") {
+                   cardServeur.appendChild(content);
+                }
+                break;
+            case "Empolyer":
+                    cardPersonnel.appendChild(content);
+                break;
+            case "Archives":
+                if(empRole !== "Nettoyage"){                   
+                   cardArchives.appendChild(content);
+                }
+                break;
+                case "Reception":
+                    if(empRole == "Reception" || empRole == "Manager" || empRole == "Nettoyage"){
+                        cardReseption.appendChild(content);
+                    }
+                    break;
+
+            case "All":
+                    cardConference.appendChild(content);
+                break;
+            default:
+               alert("Invalide room");
         }
-
-
     }
 }
 
@@ -242,65 +245,33 @@ function employer(role) {
 btnSecurite.addEventListener('click', function(){
     console.log("hello")
     cardSecurite.classList.remove("hidden")
-    cardServeur.classList.add("hidden");
-     cardReseption.classList.add("hidden");
-     cardPersonnel.classList.add("hidden");
-     cardArchives.classList.add("hidden");
-     cardConference.classList.add("hidden");
     employer("securite");
 });
 
 btnServeur.addEventListener('click',function () {
      cardServeur.classList.remove("hidden");
-     cardSecurite.classList.add("hidden");
-     cardReseption.classList.add("hidden");
-     cardPersonnel.classList.add("hidden");
-     cardArchives.classList.add("hidden");
-     cardConference.classList.add("hidden");
-        employer("Technicien");
+      employer("Technicien");
     });
 
 btnReception.addEventListener('click', function(){
-       console.log("HEllO");
-     cardServeur.classList.add("hidden");
-     cardSecurite.classList.add("hidden");
-     cardPersonnel.classList.add("hidden");
-     cardArchives.classList.add("hidden");
-     cardConference.classList.add("hidden");
      cardReseption.classList.remove("hidden");
-   
-    employer("Reception");
+     employer("Reception");
 
 });
   btnConference.addEventListener('click' , function(){
-     cardServeur.classList.add("hidden");
-     cardSecurite.classList.add("hidden");
-     cardReseption.classList.add("hidden");
-     cardPersonnel.classList.add("hidden");
-     cardArchives.classList.add("hidden");
      cardConference.classList.remove("hidden");
      employer("All");
     
   })
 
   btnPersonnel.addEventListener('click', () =>{
-     cardServeur.classList.add("hidden");
-     cardSecurite.classList.add("hidden");
-     cardReseption.classList.add("hidden");
-     cardPersonnel.classList.add("hidden");
-     cardArchives.classList.add("hidden");
      cardPersonnel.classList.remove("hidden");
-    employer("Empolyer");
+     employer("Empolyer");
   })
 
   btnArchives.addEventListener('click', () =>{
-     cardServeur.classList.add("hidden");
-     cardSecurite.classList.add("hidden");
-     cardReseption.classList.add("hidden");
-     cardPersonnel.classList.add("hidden");
-     cardArchives.classList.add("hidden");
      cardArchives.classList.remove("hidden");
-    employer("Archives");
+     employer("Archives");
 
   })
 
@@ -347,13 +318,29 @@ function afficher(employer){
   CardWorker.classList.remove("hidden")
   CardWorker.appendChild(card);
 
- 
+}
 
-
-
-
+function zoneVide (){
+    if(cardReseption.querySelector == ""){
+        cardReseption.classList.add("bg-red-200");
+    } else {
+        cardReseption.classList.remove("bg-red-200");
+    }
 
 }
+zoneVide();
+
+function finde (){
+
+    for(let i=0 ; i< Employees.length; i++){
+        if(Employees[i].Rôle == "Nettoyage" && Employees[i].Experiences.length>=2){
+        
+            console.log(Employees[i]);
+        }
+    }
+}
+finde();
+
 
 
    
