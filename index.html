@@ -20,14 +20,14 @@
                     </div>
                 </div>
                 <section class=" p-1 bg-gray-400 grid grid-cols-20 gap-3 w-full h-screen">
-                <div class="bg-white grid col-start-1 col-end-6 row-start-1 row-end-6 p-2 rounded-lg">Réception
+                <div id="Reception" class="bg-white grid col-start-1 col-end-6 row-start-1 row-end-6 p-2 rounded-lg">Réception
                     <div class="flex justify-end items-end mt-4">
                         <button id="btnReception" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
                                     +
                         </button>
                     </div>
                 </div>
-                <div  id="conferenceList" class="bg-green-300 grid row-start-6 row-end-11 col-start-1 col-end-6 p-2 rounded-lg">Salle de conférence
+                <div  id="Conference" class="bg-green-300 grid row-start-6 row-end-11 col-start-1 col-end-6 p-2 rounded-lg">Salle de conférence
                     <div class="flex justify-end items-end mt-4">
 
                         <button id="btnConference" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
@@ -36,28 +36,28 @@
                             </div>
                             
                 </div>
-                <div class="bg-white grid col-start-10 col-end-14 row-start-1 row-end-5 p-2 rounded-lg ">Salle des serveurs
+                <div  id="Technicien" class="bg-white grid col-start-10 col-end-14 row-start-1 row-end-5 p-2 rounded-lg ">Salle des serveurs
                     <div class="flex justify-end items-end mt-4">
                                 <button id="btnServeur" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
                                     +
                                 </button>
                             </div>
                 </div>
-                <div class="bg-white grid col-start-14 col-end-18 row-start-1 row-end-5 p-2 rounded-lg">Salle de sécurité
+                <div id="securite" class="bg-white grid col-start-14 col-end-18 row-start-1 row-end-5 p-2 rounded-lg">Salle de sécurité
                     <div class="flex justify-end items-end mt-4">
                                 <button id="btnSecurite" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
                                     +
                                 </button>
                             </div>
                 </div>
-                <div  class="bg-blue-300 grid col-start-10 col-end-14 row-start-7 p-2 row-end-11 rounded-lg">Salle du personnel
+                <div id="Empolyer"  class="bg-blue-300 grid col-start-10 col-end-14 row-start-7 p-2 row-end-11 rounded-lg">Salle du personnel
                     <div class="flex justify-end items-end mt-4">
                                 <button id="btnPersonnel" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
                                     +
                                 </button>
                             </div>
                 </div>
-                <div  class="bg-white grid col-start-14  col-end-18  row-start-7 row-end-11 p-2 rounded-lg">Salle d’archives
+                <div id="Archives" class="bg-white grid col-start-14  col-end-18  row-start-7 row-end-11 p-2 rounded-lg">Salle d’archives
                     <div class="flex justify-end items-end mt-4">
                                 <button id="brnArchives" class="bg-green-500 text-white px-4 py-2 rounded-full cursor-pointer">
                                     +
@@ -143,8 +143,10 @@
                       
 
                     <div id="CardAffichage">
-                              <button id="btnrmove" class= "text-gray-300" >X</button>
+                             
                             <div class="hidden border-2   rounded-lg bg-green-300 fixed  left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardSecurite">
+                                  <button id="btnrmove" class= "text-gray-300" >X</button>
+                            </div>
                             
                             <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardServeur">
                                          

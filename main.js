@@ -173,14 +173,16 @@ function load() {
 
 function addToZone(id,room){
     // console.log(id + room);
-    
-    let finded = false;
-    for(let i=0 ; i< Employees.length;i++){
-        if(Employees[i].Id === id){
-            return true;
-        } else if(!finded)
-            return;
-    }
+    let carte = document.createElement('div');
+    carte.innerHTML = `
+     <div>
+     <img src="${Employees[id-1].Photo}" class="border rounded-full border-black w-[15%] h-[10%]">
+     <p class="text-xs">${Employees[id-1].Nom}</p>
+     </div>
+    <button>X</button>
+    `
+    document.getElementById(room).appendChild(carte);
+
 }
 
 load();
@@ -232,7 +234,7 @@ function employer(room) {
                     }
                     break;
 
-            case "All":
+            case "Conference":
                     cardConference.appendChild(content);
                 break;
             default:
@@ -260,7 +262,7 @@ btnReception.addEventListener('click', function(){
 });
   btnConference.addEventListener('click' , function(){
      cardConference.classList.remove("hidden");
-     employer("All");
+     employer("Conference");
     
   })
 
@@ -331,7 +333,6 @@ function zoneVide (){
 zoneVide();
 
 function finde (){
-
     for(let i=0 ; i< Employees.length; i++){
         if(Employees[i].Rôle == "Nettoyage" && Employees[i].Experiences.length>=2){
         
