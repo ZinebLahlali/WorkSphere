@@ -27,14 +27,14 @@ const Enregistrer = document.getElementById("enregistrer");
 //Affichage
 const Card = document.getElementById("card");
 const cardSecurite = document.getElementById("cardSecurite");
-const cardServeur = document.getElementById("cardServeur")
-const cardReseption = document.getElementById("cardReseption");
+const cardServeur = document.getElementById("cardTechnicien")
+const cardReseption = document.getElementById("cardReception");
 const cardArchives = document.getElementById("cardArchives")
 const cardConference = document.getElementById("cardConference")
 const removeCard = document.querySelectorAll(".removeCard");
 const CardAffichage = document.getElementById("CardAffichage");
 const CardWorker = document.getElementById("CardWorker");
-const cardPersonnel = document.getElementById("cardPersonnel");
+const cardPersonnel = document.getElementById("cardEmpolyer");
 const conferenceList = document.getElementById("conferenceList");
 //Buttons
 const btnSecurite = document.getElementById("btnSecurite");
@@ -57,9 +57,8 @@ AddWorker.addEventListener("click", () => {
 });
 AjouterExp.addEventListener("click", () => {
     const printexperience = document.createElement("div");
-    console.log(printexperience);
+    printexperience.className = "exprience border-2 border-black mt-3 p-2";
     printexperience.innerHTML = `
-<div class="border-2 border-black mt-3 p-2">
                         <div>
                             <label for="Exper">Expériences</label>
                         </div>
@@ -72,15 +71,16 @@ AjouterExp.addEventListener("click", () => {
                         <div class="mt-2">
                          <textarea  class="border-2 rounded-lg p-2" name="descreption"  ></textarea>
                         </div>
-                       <div class="flex gap-4 mt-4">
+                    <div class="flex gap-4 mt-4">
                         <div class="flex flex-rows gap-1">
-                         <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut">
+                         <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut">
                        </div>
                        <div class="flex flex-rows gap-1">
-                        <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin">
+                        <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin">
                        </div>
-                       </div>
-</div>
+                    </div>
+
+
 `;
     experience.appendChild(printexperience);
 });
@@ -88,6 +88,7 @@ AjouterExp.addEventListener("click", () => {
 let emailRe = /^[^\s@\.\d]{4,}@[^\s\.@\W]{3,}\.[^\s\d@\W]{2,3}$/;
 let phoneNumber = /^\+212(6|7|5)\d{8}$/;
 let NomReg = /^[a-zA-Z ]{3,}$/;
+
 Url.addEventListener("input", () => {
     if (Url.value == "") {
         image.src = "avatar.jpg";
@@ -115,6 +116,17 @@ MonForm.addEventListener("submit", (e) => {
         alert("Adresse email est invalide");
         return;
     }
+   const experiences= document.querySelectorAll(".exprience");
+
+     for(let i=0; i<experiences.length; i++){
+       console.log(experiences[i]);
+       experiences[i].querySelectorAll('input', 'textarea')
+     
+
+    }
+   
+
+
 
     const object = {
         Nom: NomPrenom.value,
@@ -123,14 +135,8 @@ MonForm.addEventListener("submit", (e) => {
         Photo: Url.value,
         Email: addressEmail.value,
         telephone: phone.value,
-        Experiences: [
-            {
-                Metier: work.value,
-                Descreption: Descreption.value,
-                DateDebut: dateDebut.value,
-                DateFin: dateFin.value,
-            },
-        ],
+        Experiences: experiences
+
     };
  id++;
   
@@ -151,12 +157,10 @@ function load() {
     for (let i = 0; i < saveData; i++) {
         const printData = document.createElement("div");
         printData.innerHTML = ` 
-        <div class="border border-2 rounded-lg flex gap-2 p-1">
-    <img src="${Employees[i].Photo || "avatar.jpg"}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-    <div class="">
-        <p class="text-xs">${Employees[i].Nom}</p>
+        <div class="border border-2 rounded-lg flex   gap-2 p-1">
+    <img src="${Employees[i].Photo || "avatar.jpg"}" alt="${Employees[i].Rôle}" class="rounded-full w-[15%] h-[10%] border-2">
+        <h1 class="text-xs">${Employees[i].Nom}</h1>
         <p class="text-xs">${Employees[i].Rôle}</p>
-    </div>
     </div>
     `;
         
@@ -172,7 +176,7 @@ function load() {
 }
 
 function addToZone(id,room){
-    // console.log(id + room);
+    
     let carte = document.createElement('div');
     carte.innerHTML = `
      <div>
@@ -182,19 +186,20 @@ function addToZone(id,room){
     <button>X</button>
     `
     document.getElementById(room).appendChild(carte);
-
+    document.getElementById(`card${room}`).classList.add("hidden");
+    console.log(Employees[id-1]);
 }
 
 load();
 function employer(room) {
     
-    cardSecurite.innerHTML="";
-    cardServeur.innerHTML = "";
-    cardReseption.innerHTML = "";
-    cardPersonnel.innerHTML = "";
-    cardConference.innerHTML = "";
-    cardArchives.innerHTML = "";
-
+    cardSecurite.innerHTML='<button id="btnEnd"  class="text-gray-300 p-3 w-full flex justify-end " onclick="close_modal()">X</button>';
+    cardServeur.innerHTML = '<button  id="btnEnd" class="text-gray-300  p-3 flex w-full justify-end" onclick="close_modal()">X</button>';
+    cardReseption.innerHTML = '<button  id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardPersonnel.innerHTML = '<button  id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardConference.innerHTML = '<button id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardArchives.innerHTML = '<button id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    
     for (let i = 0; i < Employees.length; i++) {
          const empRole = Employees[i].Rôle;
          let content = document.createElement('div');
@@ -203,7 +208,7 @@ function employer(room) {
                      <div><button onclick="addToZone(${Employees[i].Id}, '${room}')" class="border text-xs border-2 absolute left-30   p-2 rounded-full bg-green-500 w-15 h-10">Add</button> </div>
                   <img src="${Employees[i].Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
                     <div>
-                        <p class="text-xs">${Employees[i].Nom}</p>
+                        <h1 class="text-xs">${Employees[i].Nom}</h1>
                         <p class="text-xs">${Employees[i].Rôle}</p>
                     </div>
                     </div>
@@ -241,20 +246,26 @@ function employer(room) {
                alert("Invalide room");
         }
     }
+  
+
+    
 }
 
 
+
 btnSecurite.addEventListener('click', function(){
-    console.log("hello")
     cardSecurite.classList.remove("hidden")
     employer("securite");
+    
 });
 
 btnServeur.addEventListener('click',function () {
      cardServeur.classList.remove("hidden");
-      employer("Technicien");
+        employer("Technicien");
     });
-
+  
+  
+     
 btnReception.addEventListener('click', function(){
      cardReseption.classList.remove("hidden");
      employer("Reception");
@@ -291,7 +302,7 @@ function afficher(employer){
     </div>
                 <div class="grid grid-cols-2 gap-3 ">
                     <div>
-                        <p class="text-xs">Nom: ${employer.Nom}</p>
+                        <h1 class="text-xs">Nom: ${employer.Nom}</h1>
                         <p class="text-xs">Role:${employer.Rôle}</p>
                     </div>
                     <div>
@@ -343,5 +354,25 @@ function finde (){
 finde();
 
 
+function close_modal(){
 
-   
+}
+
+
+function trouver(role){
+  for(let i=0 ; i<Employees.length; i++){
+    if(Employees[i].Rôle == role){
+        console.log(Employees[i])
+    }
+  }
+} 
+trouver("Manager");
+
+function finded(){
+    for(let i=0 ; i<Employees.length ; i+=2){
+        if(Employees[i].Rôle == "Manager" || Employees[i].Rôle == "Nettoyage"){
+           
+        }
+    }
+}
+finded();

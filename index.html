@@ -14,7 +14,7 @@
                     <div class="p-1 flex justify-center mt-2">
                         <strong class="border border-2 rounded-lg p-2  ">Unassigned Staff</strong>
                     </div>
-                    <div id="card" class="p-2 grid gap-3 overflow-y-auto"></div>
+                    <div id="card" class="p-2 grid gap-3 overflow-x-auto h-fit w-fit min-h-0"></div>
                     <div id="AddWorker" class="flex py-2 px-5 items-end">
                         <button class="bg-green-600 rounded-lg px-1 py-2">Add New Worker</button>
                     </div>
@@ -64,6 +64,7 @@
                                 </button>
                             </div>
                 </div>
+                
                 </section>
                 
                 <div id="forml" class=" hidden fixed  left-[45%] border rounded-lg bg-white p-4  w-fit h-full overflow-y-auto">
@@ -101,25 +102,21 @@
                                 <label for="phone">Numéro de téléphone</label>
                                 <input  class="border-2 rounded-lg p-2" type="tel" name="phone" placeholder="+212612345678" id="phone"/>
                             </div>
-                            <div>
-                                <div>
+                            <div class="exprience">
                                     <label for="Exper">Expériences</label>
-                                </div>
                                 <div>
                                 <input class="border-2 rounded-lg p-2" type="text" name="metier" id="Exper" >
                                 </div>
-                                <div>
                                     <label for="descreption">Description</label>
-                                </div>
                                 <div class="mt-2">
                                 <textarea  class="border-2 rounded-lg p-2" name="descreption" id="descreption"></textarea>
                                 </div>
                             <div class="flex gap-4 mt-4">
                                 <div class="flex flex-rows gap-1">
-                                <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut"/>
+                                <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateDebut" id="dateDebut"/>
                             </div>
                             <div class="flex flex-rows gap-1">
-                                <span>de</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" />
+                                <span>à</span> <input class="border-2 rounded-lg p-1 h-fit" type="date" name="dateFin" id="dateFin" />
                             </div>
                             </div>
                             </div>
@@ -143,21 +140,21 @@
                       
 
                     <div id="CardAffichage">
-                             
+                              
                             <div class="hidden border-2   rounded-lg bg-green-300 fixed  left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardSecurite">
-                                  <button id="btnrmove" class= "text-gray-300" >X</button>
+            
                             </div>
                             
-                            <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardServeur">
-                                         
+                            <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardTechnicien">
+                                        
                             </div>
-                            <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardReseption">
+                            <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardReception">
 
                             </div>
                             <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardConference">
 
                             </div>
-                            <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardPersonnel">
+                            <div class="hidden border-2 rounded-lg bg-green-300 fixed top-0 left-1/2 transform w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardEmpolyer">
 
                             </div>
                             <div class="hidden border-2 rounded-lg bg-green-300 fixed inset-0 transform left-132  w-50 h-fit bg-white shadow-xs z-50 p-2" id="cardArchives">
