@@ -47,15 +47,13 @@ const btnCardEmp = document.getElementById("btnCardEmp");
 const btnAnnuler = document.getElementById("btnAnnuler");
 
 
-
-// const Globalarry = []
-
 const Employees = JSON.parse(localStorage.getItem("employees")) || [];
 let id=Employees.length + 1;
 AddWorker.addEventListener("click", () => {
     Forml.classList.toggle("hidden");
 });
-AjouterExp.addEventListener("click", () => {
+AjouterExp.addEventListener("click", (e) => {
+    e.preventDefault();
     const printexperience = document.createElement("div");
     printexperience.className = "exprience border-2 border-black mt-3 p-2";
     printexperience.innerHTML = `
@@ -116,16 +114,24 @@ MonForm.addEventListener("submit", (e) => {
         alert("Adresse email est invalide");
         return;
     }
-   const experiences= document.querySelectorAll(".exprience");
 
-     for(let i=0; i<experiences.length; i++){
-       console.log(experiences[i]);
-       experiences[i].querySelectorAll('input', 'textarea')
-     
+    const expBlocks = document.querySelectorAll(".exprience");
 
-    }
-   
+    let expArray = [];
 
+    expBlocks.forEach(block => {
+        const metier = block.querySelector('input[name="metier"]').value;
+        const desc = block.querySelector('textarea[name="descreption"]').value;
+        const debut = block.querySelector('input[name="dateDebut"]').value;
+        const fin = block.querySelector('input[name="dateFin"]').value;
+
+        expArray.push({
+            Work: metier,
+            Descreption: desc,
+            dateDebut: debut,
+            dateFin: fin
+        });
+    });
 
 
     const object = {
@@ -135,9 +141,10 @@ MonForm.addEventListener("submit", (e) => {
         Photo: Url.value,
         Email: addressEmail.value,
         telephone: phone.value,
-        Experiences: experiences
-
+        assigned: false,
+        Experiences: expArray
     };
+
  id++;
   
     Employees.push(object);
@@ -150,28 +157,31 @@ MonForm.addEventListener("submit", (e) => {
     load();
 });
 
-function load() {
+function load(id) {
+    let employerId = id;
     Card.innerHTML = "";
     const saveData = Employees.length;
 
     for (let i = 0; i < saveData; i++) {
-        const printData = document.createElement("div");
-        printData.innerHTML = ` 
-        <div class="border border-2 rounded-lg flex   gap-2 p-1">
-    <img src="${Employees[i].Photo || "avatar.jpg"}" alt="${Employees[i].Rôle}" class="rounded-full w-[15%] h-[10%] border-2">
-        <h1 class="text-xs">${Employees[i].Nom}</h1>
-        <p class="text-xs">${Employees[i].Rôle}</p>
-    </div>
-    `;
-        
-    printData.dataset.id= Employees[i].Id;
-        printData.addEventListener("click", () => {
-          alert(Employees[i].Id)
-         afficher(Employees[i]);
-           
-        });
+        if(Employees[i].assigned == false){
+            if(Employees[i].Id !== employerId){
+                const printData = document.createElement("div");
+                printData.innerHTML = `
+                    <div class="border border-2 rounded-lg flex   gap-2 p-1">
+                    <img src="${Employees[i].Photo || "avatar.jpg"}" alt="${Employees[i].Rôle}" class="rounded-full w-[15%] h-[10%] border-2">
+                        <h1 class="text-xs">${Employees[i].Nom}</h1>
+                        <p class="text-xs">${Employees[i].Rôle}</p>
+                    </div>
+                    `;
+            
+                printData.dataset.id= Employees[i].Id;
+                printData.addEventListener("click", () => {
+                afficher(Employees[i]);
+                });
 
-        Card.appendChild(printData);
+                Card.appendChild(printData);
+                }
+                }
     }
 }
 
@@ -185,24 +195,28 @@ function addToZone(id,room){
      </div>
     <button>X</button>
     `
+    load(id);
+
     document.getElementById(room).appendChild(carte);
     document.getElementById(`card${room}`).classList.add("hidden");
     console.log(Employees[id-1]);
+    Employees[id-1].assigned= true;
 }
 
 load();
 function employer(room) {
     
-    cardSecurite.innerHTML='<button id="btnEnd"  class="text-gray-300 p-3 w-full flex justify-end " onclick="close_modal()">X</button>';
-    cardServeur.innerHTML = '<button  id="btnEnd" class="text-gray-300  p-3 flex w-full justify-end" onclick="close_modal()">X</button>';
-    cardReseption.innerHTML = '<button  id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
-    cardPersonnel.innerHTML = '<button  id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
-    cardConference.innerHTML = '<button id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
-    cardArchives.innerHTML = '<button id="btnEnd" class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardSecurite.innerHTML='<button class="text-gray-300 p-3 w-full flex justify-end " onclick="close_modal()">X</button>';
+    cardServeur.innerHTML = '<button class="text-gray-300  p-3 flex w-full justify-end" onclick="close_modal()">X</button>';
+    cardReseption.innerHTML = '<button class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardPersonnel.innerHTML = '<button class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardConference.innerHTML = '<button class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
+    cardArchives.innerHTML = '<button class="text-gray-300 p-3 w-full flex justify-end"onclick="close_modal()">X</button>';
     
     for (let i = 0; i < Employees.length; i++) {
          const empRole = Employees[i].Rôle;
-         let content = document.createElement('div');
+         if(Employees[i].assigned === false){
+           let content = document.createElement('div');
                     content.innerHTML = `
                     <div class="relative">
                      <div><button onclick="addToZone(${Employees[i].Id}, '${room}')" class="border text-xs border-2 absolute left-30   p-2 rounded-full bg-green-500 w-15 h-10">Add</button> </div>
@@ -245,17 +259,21 @@ function employer(room) {
             default:
                alert("Invalide room");
         }
+         }  
     }
-  
-
-    
 }
 
+function close_modal() {
+    document.querySelectorAll(".modal").forEach(modal => {
+        modal.classList.add("hidden");
+    });
+}
 
 
 btnSecurite.addEventListener('click', function(){
     cardSecurite.classList.remove("hidden")
     employer("securite");
+
     
 });
 
@@ -288,49 +306,75 @@ btnReception.addEventListener('click', function(){
 
   })
 
-  
-function afficher(employer){
- CardWorker.innerHTML = "";
-  let card = document.createElement('div');
+function afficher(employer) {
+    CardWorker.innerHTML = "";
 
-  card.innerHTML = `
+    let card = document.createElement("div");
+
+    let expHTML = "";
+
+    if (employer.Experiences && employer.Experiences.length > 0) {
+
+        expHTML += `
+        <div class="col-span-2 mt-4 p-3 bg-gray-100 rounded-xl border border-gray-300">
+            <h2 class="text-sm font-semibold mb-2 text-gray-700 border-b pb-1">
+                Expériences Professionnelles
+            </h2>
+        `;
+
+        employer.Experiences.forEach((exp, index) => {
+            expHTML += `
+                <div class="p-3 mb-3 rounded-lg bg-white shadow-sm border border-gray-200">
+                    <p class="text-xs"><span class="font-semibold">Métier :</span> ${exp.Work}</p>
+                    <p class="text-xs"><span class="font-semibold">Description :</span> ${exp.Descreption}</p>
+                    <p class="text-xs"><span class="font-semibold">Date Début :</span> ${exp.dateDebut}</p>
+                    <p class="text-xs"><span class="font-semibold">Date Fin :</span> ${exp.dateFin}</p>
+                </div>
+            `;
+        });
+
+        expHTML += `</div>`;
+    }
+
+  
+    card.innerHTML = `
+        <div class="p-4 relative">
+
+            <button id="btnCardEmp" class="absolute top-2 right-2 text-gray-400 hover:text-black text-lg">
+                ✕
+            </button>
+
+            <div class="flex justify-center mb-3">
+                <img src="${employer.Photo}" alt="" class="rounded-full w-24 h-24 border-2 border-black">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-xs">
+
+                <div>
+                    <h1><span class="font-semibold">Nom:</span> ${employer.Nom}</h1>
+                    <p><span class="font-semibold">Role:</span> ${employer.Rôle}</p>
+                </div>
+
+                <div>
+                    <p><span class="font-semibold">Email:</span> ${employer.Email}</p>
+                    <p><span class="font-semibold">Téléphone:</span> ${employer.telephone}</p>
+                </div>
+
+                <!-- Insert experiences here -->
+                ${expHTML}
+
+            </div>
+
+        </div>
+    `;
+
    
-   <div>
-    <button id="btnCardEmp" class= "text-gray-300">X</button>
-   <div class="flex justify-center">
-    <img src="${employer.Photo}" alt="" class="rounded-full w-[15%] h-[10%] border-2 border-black">
-    </div>
-                <div class="grid grid-cols-2 gap-3 ">
-                    <div>
-                        <h1 class="text-xs">Nom: ${employer.Nom}</h1>
-                        <p class="text-xs">Role:${employer.Rôle}</p>
-                    </div>
-                    <div>
-                    <p class="text-xs">Email:${employer.Email}</p>
-                    <p class="text-xs">Numero de Telephone:${employer.telephone}</p>
-                    </div>
-                    <div>
-                     <p text-xs>Metier:${employer.Metier}</p>
-                      <p text-xs>Date de debut:${employer.DateDebut}</p>
-                    
-                    </div>
-                    <div>
-                        <p text-xs>Descreption:${employer.Descreption}</p>
-                       <p text-xs>Date de fin:${employer.dateFin}</p>
-                    </div>
-                 </div>   
+    card.querySelector("#btnCardEmp").addEventListener("click", () => {
+        CardWorker.classList.add("hidden");
+    });
 
-   </div>
-  
-  
-  `;
-  card.querySelector("#btnCardEmp").addEventListener("click",()=>{
-  CardWorker.classList.add("hidden");
-  })
-
-  CardWorker.classList.remove("hidden")
-  CardWorker.appendChild(card);
-
+    CardWorker.classList.remove("hidden");
+    CardWorker.appendChild(card);
 }
 
 function zoneVide (){
@@ -353,12 +397,6 @@ function finde (){
 }
 finde();
 
-
-function close_modal(){
-
-}
-
-
 function trouver(role){
   for(let i=0 ; i<Employees.length; i++){
     if(Employees[i].Rôle == role){
@@ -376,3 +414,4 @@ function finded(){
     }
 }
 finded();
+
